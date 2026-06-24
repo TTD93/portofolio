@@ -1,0 +1,517 @@
+<%# Language switcher helper %>
+<div class="lang-switch">
+  <% if I18n.locale == :en %>
+    <%= link_to "NO", root_path(locale: :no), class: "lang-btn" %>
+  <% else %>
+    <%= link_to "EN", root_path(locale: nil), class: "lang-btn" %>
+  <% end %>
+</div>
+
+<%# Mobile topbar %>
+<div class="topbar" data-controller="mobile-menu">
+  <span class="tu">~/tin-trung-duong</span>
+  <button class="burger"
+          aria-label="Open menu"
+          data-action="click->mobile-menu#open">&#8801;</button>
+</div>
+
+<%# Mobile drawer %>
+<div class="msheet"
+     id="msheet"
+     data-mobile-menu-target="sheet">
+  <button class="burger close"
+          aria-label="Close menu"
+          data-action="click->mobile-menu#close">&#x2715;</button>
+  <nav class="snav">
+    <a href="#about"   data-action="click->mobile-menu#close"><span class="num">01</span> <%= t("nav.about") %></a>
+    <a href="#cv"      data-action="click->mobile-menu#close"><span class="num">02</span> <%= t("nav.experience") %></a>
+    <a href="#work"    data-action="click->mobile-menu#close"><span class="num">03</span> <%= t("nav.products") %></a>
+    <a href="#stack"   data-action="click->mobile-menu#close"><span class="num">04</span> <%= t("nav.stack") %></a>
+    <a href="#contact" data-action="click->mobile-menu#close"><span class="num">05</span> <%= t("nav.contact") %></a>
+  </nav>
+</div>
+
+<div class="shell">
+  <%# Sidebar %>
+  <aside class="sidebar">
+    <%# ID card %>
+    <div class="idcard">
+      <div class="avatar">photo</div>
+      <div>
+        <div class="uname"><b>Tin Trung Duong</b></div>
+        <div class="role"><%= t("sidebar.role") %></div>
+      </div>
+      <div class="statusline">
+        <span class="dot"></span> <%= t("sidebar.available") %>
+      </div>
+    </div>
+
+    <%# Currently widget %>
+    <div class="sidebar-widget">
+      <div class="widget-label"><%= t("sidebar.currently_label") %></div>
+      <div class="widget-item"><%= t("sidebar.currently_1") %></div>
+      <div class="widget-item"><%= t("sidebar.currently_2") %></div>
+      <div class="widget-item"><%= t("sidebar.currently_3") %></div>
+    </div>
+
+    <%# Nav %>
+    <nav class="snav"
+         id="deskNav"
+         data-controller="nav"
+         data-nav-sections-value='["about","cv","work","stack","contact"]'>
+      <a href="#about"   class="active" data-nav-target="link"><span class="num">01</span> <%= t("nav.about") %></a>
+      <a href="#cv"      data-nav-target="link"><span class="num">02</span> <%= t("nav.experience") %></a>
+      <a href="#work"    data-nav-target="link"><span class="num">03</span> <%= t("nav.products") %></a>
+      <a href="#stack"   data-nav-target="link"><span class="num">04</span> <%= t("nav.stack") %></a>
+      <a href="#contact" data-nav-target="link"><span class="num">05</span> <%= t("nav.contact") %></a>
+    </nav>
+
+    <%# Footer %>
+    <div class="sfoot">
+      <div><a href="https://github.com/tinduong" target="_blank" rel="noopener">github.com/tinduong</a></div>
+      <div><a href="https://www.linkedin.com/in/tin-trung-duong-8ab6a9140/" target="_blank" rel="noopener">linkedin.com/in/tinduong</a></div>
+      <div><a href="mailto:tin@costtracker.no">tin@costtracker.no</a></div>
+      <div>&copy; <%= t("sidebar.footer_copyright") %></div>
+    </div>
+  </aside>
+
+  <%# Main %>
+  <main class="main">
+    <div class="wrap">
+
+      <%# Hero %>
+      <section class="hero" id="top">
+        <div class="term">
+          <div class="term-bar">
+            <span class="tc r"></span>
+            <span class="tc y"></span>
+            <span class="tc g"></span>
+            <span class="term-title">tin-trung-duong &mdash; zsh &mdash; 80&times;24</span>
+          </div>
+          <div class="term-body">
+            <div class="cmd"><span class="p">&#10148;</span> <span class="c">~</span> whoami</div>
+            <div class="out">
+              <span id="typed"
+                    data-controller="typing"
+                    data-typing-words-value='<%= t("hero.typed_words") %>'></span><span class="caret"></span>
+            </div>
+            <div class="cmd"><span class="p">&#10148;</span> <span class="c">~</span> cat about.txt</div>
+            <div class="tagline">
+              <%= t("hero.tagline") %>
+            </div>
+            <div class="cta-row">
+              <a href="#work"    class="btn solid">&#8594; <%= t("hero.cta_products") %></a>
+              <a href="/cv.pdf"  class="btn">&#8595; <%= t("hero.cta_cv") %></a>
+              <a href="#contact" class="btn"><%= t("hero.cta_hello") %></a>
+              <a href="https://github.com/tinduong" target="_blank" rel="noopener" class="btn"><%= t("hero.cta_github") %></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <%# About %>
+      <section id="about">
+        <div class="seclabel"><%= t("about.label") %><span class="bar"></span></div>
+        <h2 class="big"><%= t("about.heading") %></h2>
+
+        <p class="lede"><%= t("about.p1").html_safe %></p>
+        <p class="lede"><%= t("about.p2").html_safe %></p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="n"><%= t("about.stat_years_n") %></div>
+            <div class="l"><%= t("about.stat_years_l") %></div>
+          </div>
+          <div class="stat">
+            <div class="n"><%= t("about.stat_products_n") %></div>
+            <div class="l"><%= t("about.stat_products_l") %></div>
+          </div>
+          <div class="stat">
+            <div class="n"><%= t("about.stat_oss_n") %></div>
+            <div class="l"><%= t("about.stat_oss_l") %></div>
+          </div>
+        </div>
+
+        <div class="highlights">
+          <div class="highlight-card">
+            <div class="hi-icon"><%= t("about.highlight_perf_icon").html_safe %></div>
+            <div class="hi-title"><%= t("about.highlight_perf_title") %></div>
+            <div class="hi-body"><%= t("about.highlight_perf_body") %></div>
+          </div>
+          <div class="highlight-card">
+            <div class="hi-icon"><%= t("about.highlight_ship_icon").html_safe %></div>
+            <div class="hi-title"><%= t("about.highlight_ship_title") %></div>
+            <div class="hi-body"><%= t("about.highlight_ship_body") %></div>
+          </div>
+          <div class="highlight-card">
+            <div class="hi-icon"><%= t("about.highlight_data_icon").html_safe %></div>
+            <div class="hi-title"><%= t("about.highlight_data_title") %></div>
+            <div class="hi-body"><%= t("about.highlight_data_body") %></div>
+          </div>
+          <div class="highlight-card">
+            <div class="hi-icon"><%= t("about.highlight_remote_icon").html_safe %></div>
+            <div class="hi-title"><%= t("about.highlight_remote_title") %></div>
+            <div class="hi-body"><%= t("about.highlight_remote_body") %></div>
+          </div>
+        </div>
+      </section>
+
+      <%# Experience %>
+      <section id="cv">
+        <div class="seclabel"><%= t("experience.label") %><span class="bar"></span></div>
+        <h2 class="big"><%= t("experience.heading") %></h2>
+
+        <div class="cv">
+
+          <div class="job">
+            <div class="when"><%= t("experience.job1_when") %></div>
+            <div>
+              <h3><%= t("experience.job1_title") %></h3>
+              <div class="org">@ <%= t("experience.job1_org") %></div>
+              <ul class="job-bullets">
+                <li><%= t("experience.job1_b1") %></li>
+                <li><%= t("experience.job1_b2") %></li>
+                <li><%= t("experience.job1_b3") %></li>
+                <li><%= t("experience.job1_b4") %></li>
+              </ul>
+              <div class="badge-row">
+                <span class="tag">Ruby on Rails</span>
+                <span class="tag">React.js</span>
+                <span class="tag">AWS</span>
+                <span class="tag">Heroku</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Gemini AI</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="job">
+            <div class="when"><%= t("experience.job2_when") %></div>
+            <div>
+              <h3><%= t("experience.job2_title") %></h3>
+              <div class="org">@ <%= t("experience.job2_org") %></div>
+              <ul class="job-bullets">
+                <li><%= t("experience.job2_b1") %></li>
+                <li><%= t("experience.job2_b2") %></li>
+                <li><%= t("experience.job2_b3") %></li>
+                <li><%= t("experience.job2_b4") %></li>
+              </ul>
+              <div class="badge-row">
+                <span class="tag">.NET / C#</span>
+                <span class="tag">React.js</span>
+                <span class="tag">AWS</span>
+                <span class="tag">Azure</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Terraform</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="job">
+            <div class="when"><%= t("experience.job3_when") %></div>
+            <div>
+              <h3><%= t("experience.job3_title") %></h3>
+              <div class="org">@ <%= t("experience.job3_org") %></div>
+              <ul class="job-bullets">
+                <li><%= t("experience.job3_b1") %></li>
+                <li><%= t("experience.job3_b2") %></li>
+                <li><%= t("experience.job3_b3") %></li>
+              </ul>
+              <div class="badge-row">
+                <span class="tag">Ruby on Rails</span>
+                <span class="tag">React.js</span>
+                <span class="tag">Redis</span>
+                <span class="tag">AWS</span>
+                <span class="tag">PostgreSQL</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="job">
+            <div class="when"><%= t("experience.job4_when") %></div>
+            <div>
+              <h3><%= t("experience.job4_title") %></h3>
+              <div class="org">@ <%= t("experience.job4_org") %></div>
+              <ul class="job-bullets">
+                <li><%= t("experience.job4_b1") %></li>
+                <li><%= t("experience.job4_b2") %></li>
+                <li><%= t("experience.job4_b3") %></li>
+              </ul>
+              <div class="badge-row">
+                <span class="tag">.NET Core</span>
+                <span class="tag">C#</span>
+                <span class="tag">React.js</span>
+                <span class="tag">Azure Kubernetes</span>
+                <span class="tag">RabbitMQ</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="job">
+            <div class="when"><%= t("experience.job5_when") %></div>
+            <div>
+              <h3><%= t("experience.job5_title") %></h3>
+              <div class="org">@ <%= t("experience.job5_org") %></div>
+              <ul class="job-bullets">
+                <li><%= t("experience.job5_b1") %></li>
+                <li><%= t("experience.job5_b2") %></li>
+                <li><%= t("experience.job5_b3") %></li>
+              </ul>
+              <div class="badge-row">
+                <span class="tag">Ruby on Rails</span>
+                <span class="tag">Vue.js</span>
+                <span class="tag">Flutter</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">AWS</span>
+                <span class="tag">GraphQL</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="job">
+            <div class="when"><%= t("experience.edu_when") %></div>
+            <div>
+              <h3><%= t("experience.edu_title") %></h3>
+              <div class="org">@ <%= t("experience.edu_org") %></div>
+              <p class="job-desc"><%= t("experience.edu_desc") %></p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <%# Products %>
+      <section id="work">
+        <div class="seclabel"><%= t("products.label") %><span class="bar"></span></div>
+        <h2 class="big"><%= t("products.heading") %></h2>
+        <p class="lede" style="margin-bottom:1.625rem">
+          <%= t("products.intro") %>
+        </p>
+
+        <div class="projects">
+
+          <%# Featured card - CostTracker %>
+          <article class="card-featured">
+            <div class="feat-shot">
+              <img src="https://costtracker.com/api/media/file/dashboard-new-updated.png"
+                   alt="CostTracker dashboard screenshot"
+                   loading="lazy"
+                   style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" />
+            </div>
+            <div class="feat-body">
+              <div class="feat-label">&#9733; <%= t("products.role_cto") %></div>
+              <h3>CostTracker</h3>
+              <p><%= t("products.costtracker_desc") %></p>
+              <div class="tags">
+                <span class="tag">Ruby on Rails</span>
+                <span class="tag">Hotwire</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Sidekiq</span>
+                <span class="tag">AWS</span>
+                <span class="tag">Docker</span>
+              </div>
+              <div style="margin-top:0.5rem">
+                <a href="https://costtracker.com" target="_blank" rel="noopener" class="card-link"><%= t("products.live_product") %> &#8594;</a>
+              </div>
+            </div>
+          </article>
+
+          <%# Luca Regnskap %>
+          <article class="card">
+            <div class="card-head">
+              <span class="tc r"></span><span class="tc y"></span><span class="tc g"></span>
+              lucaregnskap.no
+            </div>
+            <div class="card-shot">
+              <img src="https://www.lucaregnskap.no/assets/images/bilde_av_kvittering.webp"
+                   alt="Luca Regnskap mobile receipt scanning"
+                   loading="lazy"
+                   style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+            </div>
+            <div class="card-body">
+              <div class="feat-label" style="font-size:0.7rem;margin-bottom:0.4rem">&#9733; <%= t("products.role_key") %></div>
+              <h3>Luca Regnskap</h3>
+              <p><%= t("products.luca_desc") %></p>
+              <div class="tags">
+                <span class="tag">Full-Stack</span>
+                <span class="tag">Accounting</span>
+                <span class="tag">EHF / Vipps</span>
+              </div>
+              <a href="https://www.lucaregnskap.no" target="_blank" rel="noopener" class="card-link"><%= t("products.live_product") %> &#8594;</a>
+            </div>
+          </article>
+
+          <%# Riverty %>
+          <article class="card">
+            <div class="card-head">
+              <span class="tc r"></span><span class="tc y"></span><span class="tc g"></span>
+              riverty.com
+            </div>
+            <div class="card-shot">
+              <img src="https://www.riverty.com/globalassets/media-images/products-b2b/o2c/stage/riverty-invoicing-as-a-service-stage.png"
+                   alt="Riverty Invoicing as a Service"
+                   loading="lazy"
+                   style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <div class="card-body">
+              <div class="feat-label" style="font-size:0.7rem;margin-bottom:0.4rem">&#9733; <%= t("products.role_key") %></div>
+              <h3>Riverty Invoicing as a Service</h3>
+              <p><%= t("products.riverty_desc") %></p>
+              <div class="tags">
+                <span class="tag">Fintech</span>
+                <span class="tag">Invoice Lifecycle</span>
+                <span class="tag">B2B SaaS</span>
+              </div>
+              <a href="https://www.riverty.com/no-no/bedrift/produkter/invoicing-as-a-service/" target="_blank" rel="noopener" class="card-link"><%= t("products.live_product") %> &#8594;</a>
+            </div>
+          </article>
+
+          <%# Brevio Confirm %>
+          <article class="card">
+            <div class="card-head">
+              <span class="tc r"></span><span class="tc y"></span><span class="tc g"></span>
+              brevio.com/confirm
+            </div>
+            <div class="card-shot">
+              <img src="https://images.prismic.io/breviocom2/8964df8a-8a04-4967-bbee-04d25fd2b5a8_brevio.mockup.confirm.no.png?auto=compress%2Cformat&fit=max&w=1200"
+                   alt="Brevio Confirm product screenshot"
+                   loading="lazy"
+                   style="width:100%;height:100%;object-fit:cover;object-position:top;" />
+            </div>
+            <div class="card-body">
+              <div class="feat-label" style="font-size:0.7rem;margin-bottom:0.4rem">&#9733; <%= t("products.role_key") %></div>
+              <h3>Brevio Confirm</h3>
+              <p><%= t("products.brevio_confirm_desc") %></p>
+              <div class="tags">
+                <span class="tag">Audit Tech</span>
+                <span class="tag">Nordic Banks</span>
+                <span class="tag">REST API</span>
+              </div>
+              <a href="https://www.brevio.com/no/confirm" target="_blank" rel="noopener" class="card-link"><%= t("products.live_product") %> &#8594;</a>
+            </div>
+          </article>
+
+          <%# Brevio Sign %>
+          <article class="card">
+            <div class="card-head">
+              <span class="tc r"></span><span class="tc y"></span><span class="tc g"></span>
+              brevio.com/sign
+            </div>
+            <div class="card-shot">
+              <img src="https://images.prismic.io/breviocom2/a597c956-46bc-47d4-9c6a-4518198ae29a_brevio.mockup.sign.no.png?auto=compress%2Cformat&fit=max&w=1200"
+                   alt="Brevio Sign product screenshot"
+                   loading="lazy"
+                   style="width:100%;height:100%;object-fit:cover;object-position:top;" />
+            </div>
+            <div class="card-body">
+              <div class="feat-label" style="font-size:0.7rem;margin-bottom:0.4rem">&#9733; <%= t("products.role_key") %></div>
+              <h3>Brevio Sign</h3>
+              <p><%= t("products.brevio_sign_desc") %></p>
+              <div class="tags">
+                <span class="tag">eIDAS</span>
+                <span class="tag">Digital Signatures</span>
+                <span class="tag">Nordic eID</span>
+              </div>
+              <a href="https://www.brevio.com/no/sign" target="_blank" rel="noopener" class="card-link"><%= t("products.live_product") %> &#8594;</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <%# Stack %>
+      <section id="stack">
+        <div class="seclabel"><%= t("stack.label") %><span class="bar"></span></div>
+        <h2 class="big"><%= t("stack.heading") %></h2>
+        <p class="lede" style="margin-bottom:1.5rem">
+          <%= t("stack.intro") %>
+        </p>
+
+        <div class="stackgrid">
+          <div class="col">
+            <h4><%= t("stack.languages") %></h4>
+            <ul>
+              <li>Ruby <span class="skill-note"><%= t("stack.primary") %></span></li>
+              <li>TypeScript</li>
+              <li>Python</li>
+              <li>Go</li>
+              <li>Rust</li>
+              <li>SQL</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><%= t("stack.frontend") %></h4>
+            <ul>
+              <li>Hotwire / Turbo <span class="skill-note"><%= t("stack.primary") %></span></li>
+              <li>Stimulus</li>
+              <li>React</li>
+              <li>Tailwind CSS</li>
+              <li>esbuild</li>
+              <li>SCSS / CSS</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><%= t("stack.backend") %></h4>
+            <ul>
+              <li>Rails <span class="skill-note"><%= t("stack.primary") %></span></li>
+              <li>PostgreSQL</li>
+              <li>Redis</li>
+              <li>Sidekiq</li>
+              <li>GraphQL</li>
+              <li>REST APIs</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><%= t("stack.infra") %></h4>
+            <ul>
+              <li>Kamal / Docker</li>
+              <li>AWS (EC2, S3, RDS)</li>
+              <li>Terraform</li>
+              <li>GitHub Actions</li>
+              <li>Datadog / Sentry</li>
+              <li>Vim / tmux</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="quotes">
+          <div class="quote-card">
+            <blockquote><%= t("stack.quote1_text") %></blockquote>
+            <div class="quote-attr">&mdash; <span><%= t("stack.quote1_attr") %></span></div>
+          </div>
+          <div class="quote-card">
+            <blockquote><%= t("stack.quote2_text") %></blockquote>
+            <div class="quote-attr">&mdash; <span><%= t("stack.quote2_attr") %></span></div>
+          </div>
+        </div>
+      </section>
+
+      <%# Contact %>
+      <section id="contact">
+        <div class="seclabel"><%= t("contact.label") %><span class="bar"></span></div>
+
+        <div class="contact-box">
+          <h2><%= t("contact.heading") %></h2>
+          <p class="lede" style="margin:0">
+            <%= t("contact.intro") %>
+          </p>
+
+          <div class="avail-strip">
+            <span class="dot"></span>
+            <span class="avail-label"><%= t("contact.available") %></span>
+            <span class="avail-sep">|</span>
+            <span><%= t("contact.availability_detail") %></span>
+          </div>
+
+          <div class="links">
+            <a href="mailto:tin@costtracker.no" class="btn solid">&#8594;&nbsp;tin@costtracker.no</a>
+            <a href="https://github.com/tinduong" target="_blank" rel="noopener" class="btn"><%= t("contact.github") %></a>
+            <a href="https://www.linkedin.com/in/tin-trung-duong-8ab6a9140/" target="_blank" rel="noopener" class="btn"><%= t("contact.linkedin") %></a>
+            <a href="/cv.pdf" class="btn"><%= t("contact.download_cv") %></a>
+          </div>
+        </div>
+      </section>
+
+    </div><%# /wrap %>
+  </main>
+</div><%# /shell %>
