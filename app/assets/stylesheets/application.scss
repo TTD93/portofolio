@@ -1,15 +1,15 @@
 // ─── Design tokens ────────────────────────────────────────────────────────────
-$bg:        #0a0d12;
-$bg-2:      #0f141b;
-$panel:     #11171f;
-$line:      #1d2630;
-$line-2:    #28333f;
-$txt:       #d7e0e8;
-$txt-dim:   #8593a1;
-$txt-faint: #566373;
-$acc:       #5eead4;
-$acc-2:     #7dd3fc;
-$warn:      #fbbf77;
+$bg:        #ffffff;
+$bg-2:      #f5f5f5;
+$panel:     #f9f9f9;
+$line:      #e2e2e2;
+$line-2:    #d0d0d0;
+$txt:       #0f0f0f;
+$txt-dim:   #444444;
+$txt-faint: #888888;
+$acc:       #0066ff;
+$acc-2:     #0044cc;
+$warn:      #c25c00;
 $mono:      'JetBrains Mono', ui-monospace, monospace;
 $sans:      'Space Grotesk', system-ui, sans-serif;
 
@@ -34,31 +34,41 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
-::selection { background: $acc; color: #04211c; }
+::selection { background: $acc; color: #ffffff; }
 
-// ─── Language switcher ────────────────────────────────────────────────────────
+// ─── Language switcher — fixed top right ──────────────────────────────────────
 .lang-switch {
   position: fixed;
   top: 1rem;
   right: 1.25rem;
   z-index: 200;
+  display: flex;
+  gap: 0.375rem;
 }
 
 .lang-btn {
-  display: inline-block;
   font-family: $mono;
-  font-size: 0.7rem;
+  font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  color: $txt-dim;
-  border: 1px solid $line-2;
-  border-radius: 4px;
-  padding: 0.2rem 0.55rem;
-  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.06em;
+  color: $txt-faint;
+  border: 0.0625rem solid $line;
+  border-radius: 0.375rem;
+  padding: 0.3125rem 0.75rem;
+  background: $bg-2;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+  cursor: pointer;
 
   &:hover {
     color: $acc;
     border-color: $acc;
+    background: $panel;
+  }
+
+  &.active {
+    color: $acc;
+    border-color: rgba($acc, 0.4);
+    background: rgba($acc, 0.06);
   }
 }
 
@@ -87,8 +97,7 @@ a { color: inherit; text-decoration: none; }
 .main { min-width: 0; }
 
 .wrap {
-  max-width: 55rem; // ~880px
-  padding: 0 3rem;  // 0 48px
+  padding: 0 3.5rem;
 }
 
 // ─── Sidebar — ID card ────────────────────────────────────────────────────────
@@ -105,13 +114,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: 0.875rem;
   overflow: hidden;
   background: $panel;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: $mono;
-  font-size: 0.6875rem;
-  color: $txt-faint;
-  letter-spacing: 0.02em;
+  overflow: hidden;
 }
 
 .uname {
@@ -231,7 +234,7 @@ nav.snav {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(10, 13, 18, 0.92);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(0.75rem);
   -webkit-backdrop-filter: blur(0.75rem);
   border-bottom: 0.0625rem solid $line;
@@ -270,7 +273,7 @@ nav.snav {
     position: fixed;
     inset: 0;
     z-index: 60;
-    background: rgba(10, 13, 18, 0.97);
+    background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(0.5rem);
     -webkit-backdrop-filter: blur(0.5rem);
     padding: 5rem 1.75rem 2rem;
@@ -325,7 +328,7 @@ section {
   border-radius: 0.875rem;
   background: $panel;
   overflow: hidden;
-  box-shadow: 0 1.875rem 5rem -2.5rem rgba(0, 0, 0, 0.8);
+  box-shadow: 0 1.875rem 5rem -2.5rem rgba(0, 0, 0, 0.12);
 }
 
 .term-bar {
@@ -391,10 +394,9 @@ section {
 
 .tagline {
   font-family: $sans;
-  font-size: clamp(0.9375rem, 2vw, 1.125rem); // 15px–18px
+  font-size: clamp(0.9375rem, 2vw, 1.125rem);
   color: $txt-dim;
   margin-top: 0.875rem;
-  max-width: 60ch;
   line-height: 1.7;
 }
 
@@ -429,11 +431,11 @@ section {
 
   &.solid {
     background: $acc;
-    color: #04211c;
+    color: #ffffff;
     border-color: $acc;
     font-weight: 700;
 
-    &:hover { background: #7af2dd; color: #04211c; }
+    &:hover { background: #0055ee; color: #ffffff; }
   }
 }
 
@@ -450,7 +452,6 @@ h2.big {
 p.lede {
   color: $txt-dim;
   font-size: 1rem;
-  max-width: 62ch;
   margin-bottom: 0.875rem;
   line-height: 1.75;
   b { color: $txt; font-weight: 500; }
@@ -492,7 +493,7 @@ p.lede {
 // ─── Highlights strip (about section) ────────────────────────────────────────
 .highlights {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.875rem;
   margin-top: 2rem;
 }
@@ -509,6 +510,7 @@ p.lede {
   .hi-icon {
     font-size: 1.25rem;
     line-height: 1;
+    color: $acc;
   }
 
   .hi-title {
@@ -565,7 +567,6 @@ p.lede {
   .job-desc {
     color: $txt-dim;
     font-size: 0.9rem;
-    max-width: 60ch;
     line-height: 1.7;
   }
 
@@ -614,7 +615,7 @@ p.lede {
   &:hover {
     border-color: $line-2;
     transform: translateY(-0.1875rem);
-    box-shadow: 0 1.5rem 3.125rem -1.875rem rgba(0, 0, 0, 0.7);
+    box-shadow: 0 1.5rem 3.125rem -1.875rem rgba(0, 0, 0, 0.08);
   }
 }
 
@@ -759,7 +760,7 @@ p.lede {
 // ─── Tech stack grid ──────────────────────────────────────────────────────────
 .stackgrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 0.0625rem;
   background: $line;
   border: 0.0625rem solid $line;
@@ -895,7 +896,7 @@ p.lede {
   .card-featured .feat-shot { min-height: 7rem; border-right: none; border-bottom: 0.0625rem solid $line; }
   .stats { grid-template-columns: 1fr 1fr; }
   .highlights { grid-template-columns: 1fr; }
-  .stackgrid { grid-template-columns: 1fr 1fr; }
+  .stackgrid { grid-template-columns: repeat(3, 1fr); }
   .job { grid-template-columns: 1fr; gap: 0.375rem; }
   section { padding-top: 4rem; }
   .hero { padding-top: 2rem; }
